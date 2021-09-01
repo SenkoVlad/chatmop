@@ -1,0 +1,18 @@
+﻿@page "/"
+@using senkovlad.chat.shared;
+@inject Greeter.GreeterClient greeterClient;
+
+<h1>@hello</h1>
+
+@code {
+    private string hello;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await greeterClient.SayHelloAsync(new HelloRequest
+        {
+            Name = "blazor"
+        });
+        hello = response.Message;
+    }
+}
