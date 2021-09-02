@@ -1,18 +1,38 @@
 ﻿@page "/"
 @using senkovlad.chat.shared;
-@inject Greeter.GreeterClient greeterClient;
+@using System.Threading;
+@using System.IO;
+@inject Greeter.GreeterClient greeterClient
+@implements IDisposable
 
-<h1>@hello</h1>
+<h1>MESSAGES: </h1>
+
+@foreach (var message in messages)
+{
+    <div>@message</div>
+}
 
 @code {
-    private string hello;
+    private List<string> messages = new List<string>();
+    private CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+    private CancellationToken cancellationToken;
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await greeterClient.SayHelloAsync(new HelloRequest
+        cancellationToken = CancellationTokenSource.Token;
+
+        using (var stream = greeterClient.JoinChat(new HelloRequest()))
         {
-            Name = "blazor"
-        });
-        hello = response.Message;
+            while(await stream.ResponseStream.MoveNext(cancellationToken))
+            {
+                messages.Add(stream.ResponseStream.Current.Message);
+                this.StateHasChanged();
+            }
+        }
+    }
+
+    void IDisposable.Dispose()
+    {
+        CancellationTokenSource.Cancel();
     }
 }

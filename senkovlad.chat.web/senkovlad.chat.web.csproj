@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Dispose.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Grpc.Net.Client.Web" Version="2.39.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.9" PrivateAssets="all" />
@@ -13,6 +17,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shared\senkovlad.chat.shared\senkovlad.chat.shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Dispose.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Dispose.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Dispose.razor" />
   </ItemGroup>
 
 </Project>
