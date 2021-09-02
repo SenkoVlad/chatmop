@@ -2,7 +2,7 @@
 @using senkovlad.chat.shared;
 @using System.Threading;
 @using System.IO;
-@inject Greeter.GreeterClient greeterClient
+@inject ChatRoom.ChatRoomClient chatRoomClient
 @implements IDisposable
 
 <div style="height: 80vh; width: 50vw;">
@@ -12,8 +12,11 @@
             <MessagesComponent Messages=@messages />
         </div>
         <div style="grid-row: 3">
-            <Radzen.Blazor.RadzenTextArea Placeholder="Input your message" Style="margin-top: 20px; width: 100%" />
-            <Radzen.Blazor.RadzenButton>Send</Radzen.Blazor.RadzenButton>
+            <Radzen.Blazor.RadzenTextArea 
+                                          Placeholder="Input your message" 
+                                          Style="margin-top: 20px; width: 100%"
+                                          @bind-Value="inputMessage"/>
+            <Radzen.Blazor.RadzenButton Click="SendMesageAsync">Send</Radzen.Blazor.RadzenButton>
         </div>
     </div>
 </div>
@@ -21,11 +24,12 @@
 @code {
     private List<string> messages = new List<string>();
     private CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
+    private string inputMessage;
 
     protected override async Task OnInitializedAsync()
     {
 
-        using (var stream = greeterClient.JoinChat(new HelloRequest(), cancellationToken: CancellationTokenSource.Token))
+        using (var stream = chatRoomClient.JoinChat(new ChatMessageRequest(), cancellationToken: CancellationTokenSource.Token))
         {
             while(await stream.ResponseStream.MoveNext(CancellationTokenSource.Token))
             {
@@ -38,5 +42,17 @@
     void IDisposable.Dispose()
     {
         CancellationTokenSource.Cancel();
+    }
+    private async void SendMesageAsync()
+    {
+        var response = await chatRoomClient.SendMessageAsync(new ChatMessageRequest
+        {
+            MessageText = inputMessage
+        });
+        
+        if(!string.IsNullOrWhiteSpace(response.Message))
+        {
+            inputMessage = "";
+        }
     }
 }

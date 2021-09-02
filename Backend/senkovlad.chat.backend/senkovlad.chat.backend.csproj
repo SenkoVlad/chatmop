@@ -13,5 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\senkovlad.chat.web\senkovlad.chat.web.csproj" />
     <ProjectReference Include="..\..\Shared\senkovlad.chat.shared\senkovlad.chat.shared.csproj" />
+    <ProjectReference Include="..\senkovlad.chat.data\senkovlad.chat.data.csproj" />
   </ItemGroup>
 </Project>

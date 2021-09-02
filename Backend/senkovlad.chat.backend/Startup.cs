@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using senkovlad.chat.backend.Managers;
+using senkovlad.chat.backend.Services;
+using senkovlad.chat.data;
+using System;
 
 namespace senkovlad.chat.backend
 {
@@ -10,8 +15,13 @@ namespace senkovlad.chat.backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+            services.AddDbContext<AppDbContext>(option =>
+            {
+                option.UseSqlite("Data Source=chat.db");
+            }, ServiceLifetime.Singleton);
+            services.AddSingleton<ChatRoomManager>();
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -29,8 +39,11 @@ namespace senkovlad.chat.backend
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<GreeterService>().EnableGrpcWeb();
+                endpoints.MapGrpcService<ChatRoomService>().EnableGrpcWeb();
                 endpoints.MapFallbackToFile("index.html");
             });
+
+            serviceProvider.GetService<AppDbContext>().Database.EnsureCreated();
         }
     }
 }

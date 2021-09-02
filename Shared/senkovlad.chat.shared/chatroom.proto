@@ -5,12 +5,13 @@ option csharp_namespace = "senkovlad.chat.shared";
 package chatroom;
 
 service ChatRoom {
-	rpc JoinChat(ChatRequest) returns (stream ChatMessage);
-	rpc SendMessage(ChatMessage) returns (ChatMessageResponse);
+	rpc JoinChat(ChatMessageRequest) returns (stream ChatMessageResponse);
+	rpc SendMessage(ChatMessageRequest) returns (ChatMessageResponse);
 }
 
-message ChatRequest {
+message ChatMessageRequest {
+	string messageText = 1;
 }
-message ChatMessage {
-
+message ChatMessageResponse {
+	string message = 1;
 }
