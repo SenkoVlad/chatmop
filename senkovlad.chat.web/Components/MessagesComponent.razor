@@ -1,0 +1,12 @@
+﻿<div>
+    @foreach (var message in Messages)
+    {
+        <div>@message</div>
+    }
+</div>
+
+
+@code {
+    [Parameter]
+    public List<string> Messages { get; set; }
+}
