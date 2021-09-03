@@ -1,24 +1,29 @@
 ﻿@page "/"
 @using senkovlad.chat.shared;
 @using System.Threading;
-@using System.IO;
+
 @inject ChatRoom.ChatRoomClient chatRoomClient
 @implements IDisposable
 
 <div style="height: 80vh; width: 50vw;">
-    <div style="display: grid; grid-template-rows:auto 1fr auto; height: 100%">
-        <h1 style="align-self: start; grid-row: 1">Messages: </h1>
-        <div style="overflow-y: auto; grid-row: 2;align-self: end; max-height: 100%">
+    <Grid RowsDefenition="1fr auto">
+        <GridChild Row="1" style="align-self: start">
+            <h1>Messages: </h1>
+        </GridChild>
+
+        <GridChild Row="2" style="overflow-y: auto; max-height: 100%; align-self: end;">
             <MessagesComponent Messages=@messages />
-        </div>
-        <div style="grid-row: 3">
+        </GridChild>
+
+        <GridChild Row="3">
             <Radzen.Blazor.RadzenTextArea 
                                           Placeholder="Input your message" 
                                           Style="margin-top: 20px; width: 100%"
                                           @bind-Value="inputMessage"/>
             <Radzen.Blazor.RadzenButton Click="SendMesageAsync">Send</Radzen.Blazor.RadzenButton>
-        </div>
-    </div>
+        </GridChild>
+
+    </Grid>
 </div>
 
 @code {
@@ -53,6 +58,7 @@
         if(!string.IsNullOrWhiteSpace(response.Message))
         {
             inputMessage = "";
+            this.StateHasChanged();
         }
     }
 }

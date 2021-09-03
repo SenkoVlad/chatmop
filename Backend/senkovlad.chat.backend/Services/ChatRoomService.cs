@@ -1,11 +1,9 @@
 ﻿using Grpc.Core;
 using Microsoft.Extensions.Logging;
 using senkovlad.chat.backend.Managers;
-using senkovlad.chat.data;
 using senkovlad.chat.data.Models;
 using senkovlad.chat.shared;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace senkovlad.chat.backend.Services
