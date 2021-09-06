@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "senkovlad.chat.mobile.iOS",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "senkovlad.chat.mobile", "Frontend\Mobile\senkovlad.chat.mobile\senkovlad.chat.mobile\senkovlad.chat.mobile.csproj", "{F99559B8-AA1F-417F-BDB2-87516D895B1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "senkovlad.chat.web", "senkovlad.chat.web\senkovlad.chat.web.csproj", "{6AB9E4E5-353D-4C84-AC4E-FAEDC90A2EFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "senkovlad.chat.web", "Frontend\Web\senkovlad.chat.web\senkovlad.chat.web.csproj", "{6AB9E4E5-353D-4C84-AC4E-FAEDC90A2EFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "senkovlad.chat.data", "Backend\senkovlad.chat.data\senkovlad.chat.data.csproj", "{5E531E89-194F-4374-A016-8B58322AC496}"
 EndProject
