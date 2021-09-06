@@ -1,0 +1,39 @@
+﻿
+<div @attributes="@InputParaments">
+    @ChildContent
+</div>
+
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public int Column { get; set; }
+    [Parameter]
+    public int Row { get; set; }
+    [Parameter]
+    public int ColumnSpan { get; set; }
+    [Parameter]
+    public int RowSpan { get; set; }
+    [Parameter]
+    public string Height { get; set; } = "100%";
+    [Parameter]
+    public string Width { get; set; } = "100%";
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputParaments { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        var style = "";
+        if (InputParaments == null)
+            InputParaments = new Dictionary<string, object>();
+
+        StyleGenerator.GenerateChildStyle(ref style, Column, Row, ColumnSpan, RowSpan, Width, Height);
+
+        if (InputParaments.ContainsKey("style"))
+            InputParaments["style"] = style + InputParaments["style"];
+        else
+            InputParaments.Add("style", style);
+    }
+
+}

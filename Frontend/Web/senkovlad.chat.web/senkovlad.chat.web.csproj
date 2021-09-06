@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\senkovlad.chat.shared\senkovlad.chat.shared.csproj" />
+    <ProjectReference Include="..\Components\senkovlad.blazor.components\senkovlad.blazor.components.csproj" />
   </ItemGroup>
 
 </Project>
