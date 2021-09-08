@@ -1,2 +1,2 @@
 # chatmop
-char by grpc 
+chat by grpc 
