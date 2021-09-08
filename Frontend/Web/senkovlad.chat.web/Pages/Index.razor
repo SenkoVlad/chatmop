@@ -16,10 +16,9 @@
         </GridChild>
 
         <GridChild Row="3">
-            <Radzen.Blazor.RadzenTextArea 
-                                          Placeholder="Input your message" 
+            <Radzen.Blazor.RadzenTextArea Placeholder="Input your message"
                                           Style="margin-top: 20px; width: 100%"
-                                          @bind-Value="inputMessage"/>
+                                          @bind-Value="inputMessage" />
             <Radzen.Blazor.RadzenButton Click="SendMesageAsync">Send</Radzen.Blazor.RadzenButton>
         </GridChild>
 
@@ -36,7 +35,7 @@
 
         using (var stream = chatRoomClient.JoinChat(new ChatMessageRequest(), cancellationToken: CancellationTokenSource.Token))
         {
-            while(await stream.ResponseStream.MoveNext(CancellationTokenSource.Token))
+            while (await stream.ResponseStream.MoveNext(CancellationTokenSource.Token))
             {
                 messages.Add(stream.ResponseStream.Current.Message);
                 this.StateHasChanged();
@@ -54,8 +53,8 @@
         {
             MessageText = inputMessage
         });
-        
-        if(!string.IsNullOrWhiteSpace(response.Message))
+
+        if (!string.IsNullOrWhiteSpace(response.Message))
         {
             inputMessage = "";
             this.StateHasChanged();
