@@ -1,0 +1,38 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "senkovlad.chat.shared";
+
+package chat;
+
+message ChatMessage {
+	string from = 1;
+	string msg = 2;
+	string time = 3;
+}
+
+message User {
+	string id = 1;
+	string name = 2;
+}
+
+message Empty {}
+
+message UserList {
+	repeated User users = 1;
+}
+
+message JoinResponse {
+	int32 error = 1;
+	string msg = 2;
+}
+
+message ReceiveMsgRequest {
+    string user = 1;
+}
+
+service ChatService {
+	rpc join(User) returns (JoinResponse) {}
+	rpc sendMessage(ChatMessage) returns (Empty) {}
+	rpc reciveMsg(Empty) returns (stream ChatMessage) {}
+	rpc getAllUsers(Empty) returns (UserList) {}
+}

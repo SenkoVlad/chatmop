@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{50F60C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "senkovlad.chat.shared", "Shared\senkovlad.chat.shared\senkovlad.chat.shared.csproj", "{2324DD13-BE83-4400-A077-88DA02F8FC87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "senkovlad.char.desktop", "Frontend\Desktop\senkovlad.char.desktop\senkovlad.char.desktop.csproj", "{22762700-58E6-4BA4-BACA-4C1B3684B998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "senkovlad.chat.desktop", "Frontend\Desktop\senkovlad.chat.desktop\senkovlad.chat.desktop.csproj", "{22762700-58E6-4BA4-BACA-4C1B3684B998}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "senkovlad.chat.mobile.Android", "Frontend\Mobile\senkovlad.chat.mobile\senkovlad.chat.mobile.Android\senkovlad.chat.mobile.Android.csproj", "{5E3FEA1B-1A9D-4189-9A94-4CBD71A67BB6}"
 EndProject

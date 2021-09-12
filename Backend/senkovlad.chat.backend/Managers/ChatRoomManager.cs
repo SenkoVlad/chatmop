@@ -12,15 +12,15 @@ namespace senkovlad.chat.backend.Managers
 {
     public class ChatRoomManager
     {
-        private AppDbContext _dbContext;
-        public event Func<string, Task> messageSent;
+        private readonly AppDbContext _dbContext;
+        public event Func<string, Task> MessageSent;
         public List<IServerStreamWriter<ChatMessageResponse>> listeners;
 
         public ChatRoomManager(AppDbContext dbContext)
         {
             listeners = new List<IServerStreamWriter<ChatMessageResponse>>();
             _dbContext = dbContext;
-            messageSent += ChatRoomService__messageSent;
+            MessageSent += ChatRoomService__messageSent;
         }
 
         private async Task ChatRoomService__messageSent(string message)
@@ -43,7 +43,7 @@ namespace senkovlad.chat.backend.Managers
         {
             await _dbContext.AddAsync(messageModel);
             await _dbContext.SaveChangesAsync();
-            await messageSent.Invoke(messageModel.Text);
+            await MessageSent.Invoke(messageModel.Text);
         }
     }
 }

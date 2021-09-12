@@ -19,7 +19,9 @@ namespace senkovlad.chat.backend
             {
                 option.UseSqlite("Data Source=chat.db");
             }, ServiceLifetime.Singleton);
+
             services.AddSingleton<ChatRoomManager>();
+            services.AddSingleton<ChatGrpcManager>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
@@ -40,6 +42,7 @@ namespace senkovlad.chat.backend
             {
                 endpoints.MapGrpcService<GreeterService>().EnableGrpcWeb();
                 endpoints.MapGrpcService<ChatRoomService>().EnableGrpcWeb();
+                endpoints.MapGrpcService<ChatGrpcService>().EnableGrpcWeb();
                 endpoints.MapFallbackToFile("index.html");
             });
 

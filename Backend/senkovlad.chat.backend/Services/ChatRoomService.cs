@@ -1,5 +1,4 @@
 ﻿using Grpc.Core;
-using Microsoft.Extensions.Logging;
 using senkovlad.chat.backend.Managers;
 using senkovlad.chat.data.Models;
 using senkovlad.chat.shared;
@@ -10,12 +9,10 @@ namespace senkovlad.chat.backend.Services
 {
     public class ChatRoomService : ChatRoom.ChatRoomBase
     {
-        private readonly ILogger<ChatRoomService> _logger;
-        private ChatRoomManager _chatRoomManager;
+        private readonly ChatRoomManager _chatRoomManager;
 
-        public ChatRoomService(ILogger<ChatRoomService> logger, ChatRoomManager chatRoomManager)
+        public ChatRoomService(ChatRoomManager chatRoomManager)
         {
-            _logger = logger;
             _chatRoomManager = chatRoomManager;
         }
         public override async Task JoinChat(ChatMessageRequest request, IServerStreamWriter<ChatMessageResponse> responseStream, ServerCallContext context)
@@ -42,7 +39,8 @@ namespace senkovlad.chat.backend.Services
             var messageModel = new Message
             {
                 Id = Guid.NewGuid().ToString(),
-                Text = request.MessageText
+                Text = request.MessageText,
+                Time = DateTime.Now
             };
             await _chatRoomManager.AddMessage(messageModel);
             return new ChatMessageResponse

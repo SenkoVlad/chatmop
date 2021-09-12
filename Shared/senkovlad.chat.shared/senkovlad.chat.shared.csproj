@@ -20,5 +20,6 @@
   <ItemGroup>
     <Protobuf Include="chatroom.proto" />
     <Protobuf Include="greet.proto" />
+    <Protobuf Include="chat.proto"/>
   </ItemGroup>
 </Project>
