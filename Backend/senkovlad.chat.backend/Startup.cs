@@ -10,6 +10,7 @@ using System;
 
 namespace senkovlad.chat.backend
 {
+    //TEST
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
